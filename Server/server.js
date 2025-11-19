@@ -14,7 +14,12 @@ const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(cors()); // Allows requests from our React frontend
+// Allow requests from ANYWHERE (including Vercel)
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+})); // Allows requests from our React frontend
 app.use(express.json()); // Allows us to parse JSON in request bodies
 
 // --- DATABASE CONNECTION (Hardcoded to fix "123" error) ---
